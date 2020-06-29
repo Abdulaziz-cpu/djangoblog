@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <style>
+        h3{
+        border:2px solid rgb(32, 32, 32);
+        border-radius: 3px;
+        background-color: rgb(32, 32, 32);
+        color:white;
+        text-align: center;
+        }
+        .btn-danger:hover{
+        border:yellowgreen;
+        background-color: yellowgreen;
+        color:black
+        }
+        a{
+          color:white;
+          text-decoration: none;
+        }
+        a:hover{
+          color:black;
+          text-decoration: none;
+        }
+    </style>
+    <h3>Giriş et</h3>
+    <hr>
+    <form method = "post" >
+        {% csrf_token %}
+        {{form|crispy}}
+        <p>Əgər bir hesabınız yoxdursa "Qeydiyyatdan keç"ə basaraq qeydiyyatdan keçə bilərsiniz</p>
+        
+        <button type="submit" class = "btn btn-danger">Daxil ol</button>
+        <button type="submit" class = "btn btn-danger"><a href="{% url 'user:register' %}">Qeydiyyatdan keç</a></button>
+    </form>
+  </div>
+</div>
+
+{% endblock body %}

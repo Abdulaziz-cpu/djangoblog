@@ -1,0 +1,44 @@
+{%load static%}
+<style>
+  a{
+    
+    margin:2px;
+    border-radius:3px
+  }
+</style>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+
+<!---nav class="navbar navbar-expand navbar-dark bg-dark">--->
+    <a style="border:1px solid white;"class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'icons8-google-code-64.ico' %}" width="30px" height="30px" alt=""> PD</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'about' %}">Haqqımızda </a>
+        </li>
+        <li class="nav-item">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'article:articles' %}">Məqalələr</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'article:dashboard' %}">Nəzarət paneli</a>
+        </li>
+        <li class="nav-item">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'user:logout' %}">Çıxış et</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'user:login' %}">Daxil ol</a>
+        </li>
+      {% endif %}
+      <li class="nav-item">
+          <a style="border:1px solid white;"class="nav-link" href="{% url 'user:register' %}">Qeydiyyatdan keç</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <style>
+        h3{
+        border:2px solid rgb(32, 32, 32);
+        border-radius: 3px;
+        background-color: rgb(32, 32, 32);
+        color:white;
+        text-align: center;
+        }
+        .btn-danger:hover{
+        border:yellowgreen;
+        background-color: yellowgreen;
+        color:black
+        }
+    </style>
+    <h3>Məqalə yüklə</h3>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{form|crispy}}
+        <button type="submit" class = "btn btn-danger">Məqalə yüklə</button>
+    </form>
+  </div>
+</div>
+
+{% endblock body %}

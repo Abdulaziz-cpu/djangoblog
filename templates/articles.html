@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-10 offset-md-3">
+    <div class="col-lg-8">
+<style>
+#first{
+        border:2px solid rgb(32, 32, 32);
+        border-radius: 3px;
+        background-color: rgb(32, 32, 32);
+        color:white;
+        text-align: center;
+}
+#firsta{
+    color:black;
+}
+#firsta:hover{
+    color:rgb(19, 35, 250);
+}
+.btn-danger:hover{
+  border:yellowgreen;
+  background-color: yellowgreen;
+  color:black
+}
+input{
+  border:1px solid black;
+  border-radius: 4px;
+  height: 37px;
+}
+
+
+
+</style>
+<h3 id="first">Məqalələr</h3>
+<hr>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-10 offset-md-3">
+    <div class="col-lg-8">
+    
+      <form>
+        {% csrf_token %}
+        <input type="text" name="keyword" class=" input-sm" maxlength="64" placeholder="Axtarış">
+        <button type="submit" class="btn btn-danger">Axtarış</button>
+      </form>
+    </div>
+  </div>
+    
+</div>
+
+{% if articles %}
+
+{% for article in articles %}
+    <div class="row">
+    <div class="col-md-10 offset-md-3">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <a id="firsta" href="{% url 'article:detail' article.id %}"><h2 class="mt-4">{{article.title}}</h2></a>
+        <!-- Author -->
+        <p class="lead">
+          {{article.author.username}} tərəfindən daxil edildi.
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{article.created_date}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        {% if article.article_image %}
+        <a href="{% url 'article:detail' article.id %}"><img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""></a>
+        {% endif %}
+        
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">
+            {{article.content|safe|truncatewords:30}}
+        </p>
+        <a style="float : right;" href="{% url 'article:detail' article.id %}" class="btn btn-danger">Davamını oxu</a>
+        <hr>
+
+        
+
+       
+
+        
+
+      </div>
+    
+
+      
+
+        
+
+        
+        
+
+      
+    </div>
+    </div>
+
+{% endfor %}
+
+{% else %}
+<div class="row">
+  <div class="col-md-10 offset-md-3">
+    <div class="col-lg-8">
+      <div style="margin-top:5px;"class="alert alert-danger">
+        Məqalə tapılmadı
+      </div>
+    </div>
+  </div>
+</div>      
+{% endif %}
+
+{% endblock body %}
